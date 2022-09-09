@@ -7,7 +7,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                 <!--Titre de modal-->
-                    <h5 class="modal-title" id="exampleModalLongTitle">Adicionar Utilizadores</h5>
+                    <h6 class="h6 modal-title font-weight-bold text-primary" id="exampleModalLongTitle">Adicionar Utilizador</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -24,6 +24,58 @@
                             <label for="email" class="">{{ __('Email Address') }}</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                         </div>
+                         <!-- CHAMPS POUR PERFIL DE L'UTILISATEUR -->
+                         <div class="form-group font-weight-bold ">
+                            <label for="perfil" class="">{{ __('Perfil: ') }}</label>
+                                {{-- <input id="profil" type="text" class="form-control" name="profil"> --}}
+                                <select name="perfil" id="perfil" class="form-control perfil">
+                                    <option value="">..selecione perfil...</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{$role->name}}">
+                                            @if ($role->name=="dev"){{ 'Desenvolvedor' }}
+                                            @elseif ($role->name=="admin"){{ 'Administrador' }}
+                                            @elseif ($role->name=="coordenador-nacional"){{ 'Coordenador Nacional' }}
+                                            @elseif ($role->name=="supervisor"){{ 'Supervisor' }}
+                                            @elseif ($role->name=="coordenador-regional") {{ 'Coordenador Regional' }}
+                                            @elseif ($role->name=="coordenador-provincia") {{ 'Coordenador de Provincia' }}
+                                            @else {{$role->name}}
+                                            @endif
+                                        </option>
+                                    @endforeach
+                                </select>
+                          </div>
+
+                           <!-- CHAMPS REGIAO -->
+                           <div class="form-group " id="grupo-provincia">
+                            <label for="provincia_id">Provincia:</label>
+                            <select name="provincia_id" class="form-control provincia" id="">
+                                <option > ..selecione provincia </option>
+                                @foreach ($provincias as $provincia )
+                                     <option value="{{ $provincia->id }}"> {{$provincia->provincia}} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                         <div class="form-group" id="grupo-regiao">
+                            <label for="regiao_id">Região:</label>
+                            <select name="regiao_id" class="form-control regiao" id="" >
+                                <option  > selecione uma região</option>
+
+                            </select>
+                        </div>
+                         <div class="form-group" id="grupo-circulo">
+                            <label for="circulo_id">Circulo Eleitoral:</label>
+                            <select name="circulo_id" class="form-control circulo" id="" >
+                                <option  > selecione uma circulo</option>
+
+                            </select>
+                        </div>
+                         <div class="form-group" id="grupo-sector">
+                            <label for="sector_id">Sector:</label>
+                            <select name="sector_id" class="form-control sector" id="" >
+                                <option  > selecione um sector</option>
+
+                            </select>
+                        </div>
 
                          <div class="form-group">
                             <label for="password" class="">{{ __('Codigo:') }}</label>
@@ -38,8 +90,8 @@
 
                     </div>
                     <div class="modal-footer">
-                         <button type="button" class="btn btn-sm btn-outline-info" data-dismiss="modal">Voltar</button>
                         <button type="submit" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Adicionar</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Voltar</button>
                     </div>
                 </form>
             </div>
@@ -154,7 +206,7 @@
                                             @endif
                                             ><i class="fas fa-check "></i> <!--Check -->
                                         </a>
-                                        <a href="  " data-toggle="configurar" data-placement="top" title="Configurar"  class="btn btn-sm text-info mr-2"> <i class="fas text-primary fa-cog"></i> <!--Modifier --></a>
+                                        <a href=" {{route('user.show',$user->id)}}" data-toggle="configurar" data-placement="top" title="Configurar"  class="btn btn-sm text-info mr-2"> <i class="fas text-primary fa-cog"></i> <!--Modifier --></a>
                                         <a href=" {{route('user.edit',$user->id)}} " data-toggle="editar" data-placement="top" title="Editar"  class="btn btn-sm text-info mr-2"> <i class="fas text-primary fa-edit"></i> <!--Modifier --></a>
                                         <form action=" {{route('user.destroy', $user->id)}}  " method="post"
                                             onsubmit=" return confirm('Atenção! Apagando dados... Tem certeza?');">
@@ -184,33 +236,56 @@
         $('[data-toggle="check"]').tooltip();
         $('[data-toggle="apagar"]').tooltip();
         $('[data-toggle="configurar"]').tooltip();
+
+        $('#grupo-provincia').hide()
+        $('#grupo-regiao').hide()
+        $('#grupo-circulo').hide()
+        $('#grupo-sector').hide()
         // Start Edit Record
-
-        // table.on('click', '.edit', function(){
-
-        //     $tr = $(this).closest('tr');
-        //     if($($tr).hasClass('child')){
-        //         $tr = $tr.prev('.parent');
-        //     }
-
-        //     var data = table.row($tr).data();
-        //     console.log(data);
-
-        //     $('#cod_regiao').val(data[1]);
-        //     $('#regiao').val(data[2]);
-
-        //     $('#editForm').attr('action', '/regioes/'+data[0]);
-        //     $('#editarRegionModal').modal('show');
-        // })
-        // End Edit Record
-
-
-
-
 
 
     });
 
+    $(document).on('change','.perfil',function(){
+            let role = $(this).val()
+            // alert("Perfil changed : "+ role);
+            if(role=='admin'){
+                $('#grupo-provincia').hide()
+                $('#grupo-regiao').hide()
+                $('#grupo-circulo').hide()
+                $('#grupo-sector').hide()
+            }else
+            if(role=='coordenador-nacional'){
+                $('#grupo-provincia').hide()
+                $('#grupo-regiao').hide()
+                $('#grupo-circulo').hide()
+                $('#grupo-sector').hide()
+            }else if(role=='supervisor'){
+                $('#grupo-provincia').show()
+                $('#grupo-regiao').show()
+                $('#grupo-circulo').show()
+                $('#grupo-sector').show()
+
+            }else if(role=='coordenador-provincia'){
+                $('#grupo-provincia').show()
+
+                $('#grupo-regiao').hide()
+                $('#grupo-circulo').hide()
+                $('#grupo-sector').hide()
+            }else if(role=='coordenador-regional'){
+                $('#grupo-provincia').show()
+                $('#grupo-regiao').show()
+
+                $('#grupo-circulo').hide()
+                $('#grupo-sector').hide()
+            }else{
+                $('#grupo-provincia').hide()
+                $('#grupo-regiao').hide()
+                $('#grupo-circulo').hide()
+                $('#grupo-sector').hide()
+            }
+
+    });
 
     $(document).on('change','.provincia',function(){
         // console.log("Provincia is changed !");
@@ -267,5 +342,34 @@
          }
         });
     }); /// FIN DE LA FUNCTION
+
+
+    $(document).on('change','.circulo',function(){
+        var sector_id=$(this).val();
+        var a=$(this).parent().parent().parent();
+        var op="";
+        $.ajax({
+             type: 'get',
+             //url:'{!!URL::to('findSecteurName')!!}',
+             url:"{{route('find.sector')}}",
+             data:{'id':sector_id},
+            // dataType:'json',
+             success:function(data){
+
+            op+='<option value="0" selected disabled>selecione o sector</option>';
+             for(var i=0; i<data.length; i++){
+                 op+='<option value="'+data[i].id+'">'+data[i].cod_sector+'-'+data[i].sector+'</option>';
+
+             }
+             a.find('.sector').html("")
+             a.find('.sector').append(op)
+
+         },
+         error:function(){
+
+         }
+        });
+    }); /// FIN DE LA FUNCTION
+
 </script>
 @endsection

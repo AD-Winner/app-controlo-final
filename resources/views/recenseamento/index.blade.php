@@ -28,6 +28,11 @@
                              <input type="date" class="form-control" id="data" max="2"  require
                              min="1" name="data"  placeholder="Digite tipo data de recenseamento..." />
                         </div>
+                        <div class="form-group font-weight-bold text-secondary">
+                            <label for="estimado">População estimada:</label>
+                             <input type="number" class="form-control" id="estimado" 
+                             min="1" name="estimado"  placeholder="População estimada..." />
+                        </div>
 
                     </div>
                     <div class="modal-footer">
@@ -85,19 +90,23 @@
 
         <div class="row">
             <div class="table-responsive">
-                    <table id="datatable" class="table  table-sm table-striped table-primary table-hover ">
-                        <thead >
+                    <table id="datatable" class="table  table-sm table-hover ">
+                        <thead class="table-primary">
                             <tr>
                                 <th  scope="col">Tipo</th>
                                 <th  scope="col">Data</th>
+                                <th  scope="col">Estimação</th>
+                                <th  scope="col">Kits</th>
                                 <th  scope="col" class="text-center">Ações</th>
 
                             </tr>
                         </thead>
-                        <tfoot >
+                        <tfoot class="table-primary" >
                             <tr>
                                 <th  scope="col">Tipo</th>
                                 <th  scope="col">Data</th>
+                                <th  scope="col">Estimação</th>
+                                <th  scope="col">Kits</th>
                                 <th  scope="col" class="text-center">Ações</th>
                             </tr>
                         </tfoot>
@@ -107,6 +116,8 @@
 
                                     <td> {{$recenseamento->tipo}} </td>
                                     <td> {{$recenseamento->data->format('d-m-Y')}} </td>
+                                    <td> {{$recenseamento->estimado}} </td>
+                                    <td> {{$recenseamento->kits->count()}} </td>
 
                                     <td class="d-flex justify-content-center ">
                                         <form action=" {{route('recenseamento.destroy', ['id'=>$recenseamento->id])}}  " method="post"

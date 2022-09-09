@@ -46,11 +46,13 @@ class RecenseamentoController extends Controller
 
             'data' => 'required|date|after:today',
             'tipo' => 'required|string|max:191|min:2',
+            'estimado' => 'integer',
         ]);
 
         $recenseamento =  new Recenseamento();
         $recenseamento->data = $request->data;
         $recenseamento->tipo = $request->tipo;
+        $recenseamento->estimado = $request->estimado;
         $recenseamento->save();
         return redirect(route('recenseamento.index'))->with('success', '[OK] Recenseamento registado com sucesso.');
     }

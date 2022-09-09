@@ -11,53 +11,18 @@
                     <h5 class="modal-title" id="exampleModalLongTitle">Adicionar Recenseados</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!-- Corp de Modal-->
-                <form  method="POST" action=" {{route('recenseado.store')}} " >
+                </button>
+            </div>
+            <!-- Corp de Modal-->
+            <h6 class="modal-title ml-3 text-primary font-weight-bold" id="exampleModalLongTitle"> {{$recenseamento->tipo}} : {{$recenseamento->data->format('Y')}}</h6>
+                <form  method="POST" action=" {{route('supervisor.recenseados.store')}} " >
                 @csrf
                     <div class="modal-body">
-
                         <input type="hidden" name="recenseamento_id" value="{{$recenseamento->id}}"/>
-
-                        <div class="form-group">
-                            <label for="provincia_id">Provincia:</label>
-                            <select name="provincia_id" class="form-control provincia" id="">
-                                <option > ..selecione provincia </option>
-                                @foreach ($provincias as $provincia )
-                                     <option value="{{ $provincia->id }}"> {{$provincia->provincia}} </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="regiao_id">Região:</label>
-                            <select name="regiao_id" class="form-control" id="" >
-                                <option  > selecione uma região</option>
-                                @foreach ($regioes as $regiao )
-                                     <option value="{{ $regiao->id }}"> {{$regiao->regiao}} </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="circulo_id">Circulo Eleitoral:</label>
-                            <select name="circulo_id" class="form-control" id="" >
-                                <option  > selecione uma circulo</option>
-                                @foreach ($circulos as $circulo )
-                                     <option value="{{ $circulo->id }}"> {{$circulo->circulo}} </option>
-                                @endforeach
-                            </select>
-                        </div>
-                         <div class="form-group">
-                            <label for="sector_id">Sector:</label>
-                            <select name="sector_id" class="form-control" id="" >
-                                <option  > selecione um sector</option>
-                                @foreach ($sectores as $sector )
-                                     <option value="{{ $sector->id }}"> {{$sector->sector}} </option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <input type="hidden" name="provincia_id" value="{{Auth::user()->provincia_id}}"/>
+                        <input type="hidden" name="regiao_id"   value="{{ Auth::user()->regiao_id}}"/>
+                        <input type="hidden" name="circulo_id"  value="{{ Auth::user()->circulo_id}}"/>
+                        <input type="hidden" name="sector_id"   value="{{ Auth::user()->sector_id}}"/>
 
                         <div class="form-group font-weight-bold text-secondary">
                             <label for="data">Data de Recenseamento:</label>
@@ -119,72 +84,64 @@
                 </div>
             @endif
             <h5 class="modal-title ml-3 text-primary font-weight-bold" id="exampleModalLongTitle"> {{$recenseamento->tipo}} : {{$recenseamento->data->format('Y')}}</h5>
+            <h6 class="modal-title ml-3 text-secondary font-weight-bold" id=""> <span class="text-primary"> Região :</span> {{ __(Auth::user()->regiao->regiao) }}  <h6>
              <hr class="featurette-divider">
              <div class="row">
-                <div class="col-sm-12">
-                 <div class="float-right">
-                        <!-- Botton de la modal d'ajout de Region-->
-                        <button type="button" class="btn btn-sm btn-primary mr-4 float-right" data-toggle="modal" data-target="#AjouterRegionModal">
-                            <i class="fas fa-plus"></i> Recenseados
-                        </button>
-                        {{-- <a class="btn btn-sm btn-outline-secondary" href=""><i class="fas fa-print"></i> PDF </a> --}}
+                    <div class="col-sm-12">
+                            {{-- <div class="float-right"> --}}
+                                    <!-- Botton de la modal d'ajout de Region-->
+                                    {{-- <button type="button" class="btn btn-sm btn-primary mr-4 float-right" data-toggle="modal" data-target="#AjouterRegionModal">
+                                        <i class="fas fa-plus"></i> Recenseados
+                                    </button> --}}
+                                    {{-- <a class="btn btn-sm btn-outline-secondary" href=""><i class="fas fa-print"></i> PDF </a> --}}
+                                {{-- </div> --}}
+                            </div>
+                            <div class="col-sm-12 ">
+                                    <h6 class="h6 font-weight-bold"> {{ __('Total :') }} <span class="text-primary"> {{__($f + $m) }} </span> Eleitores Recenseados, 
+                                        <span class="text-primary">  {{__($m)}} </span>
+                                         {{('Homens e ')}} 
+                                         <span class="text-primary">  {{__($f)}} </span> 
+                                         {{('Mulheres')}}
+                                    </h6>
+                            </div>
                     </div>
+                 {{-- <hr class="featurette-divider"> --}}
                 </div>
-                    <div class="col-sm-12 ">
-                          <h6 class="h6 font-weight-bold">Total <span class="text-primary"> {{$tot}} </span> Eleitores Recenseados  </h6>
-                    </div>
-             </div>
-                {{-- <hr class="featurette-divider"> --}}
-        </div>
 
         <div class="row">
             <div class="table-responsive">
                     <table id="datatable" class="table  table-sm table-hover ">
                         <thead class="table-primary">
-                            <tr>
-                                <th  scope="col">Região</th>
+                            <tr>                               
                                 <th  scope="col">Sector</th>
                                 <th  scope="col">Kit</th>
                                 <th  scope="col">Data</th>
                                 <th  scope="col">Homens</th>
                                 <th  scope="col">Mulheres</th>
                                 <th  scope="col">Total</th>
-                                <th  scope="col" class="text-center">Ações</th>
+                                
 
                             </tr>
                         </thead>
                         <tfoot class="table-primary" >
                             <tr>
-                                <th  scope="col">Região</th>
                                 <th  scope="col">Sector</th>
                                 <th  scope="col">Kit</th>
                                 <th  scope="col">Data</th>
                                 <th  scope="col">Homens</th>
                                 <th  scope="col">Mulheres</th>
-                                <th  scope="col">Total</th>
-                                <th  scope="col" class="text-center">Ações</th>
+                                <th  scope="col">Total</th>                                
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach ($recenseados as $recenseado )
-                                <tr>
-
-                                    <td> {{$recenseado->regiao->cod_regiao}} : {{$recenseado->regiao->regiao}} </td>
-                                    <td> {{$recenseado->sector->cod_sector}} : {{$recenseado->sector->sector}} </td>
+                                <tr>                                    
+                                    <td> {{$recenseado->sector->sector}} </td>
                                     <td> {{$recenseado->kit->numero}} : {{$recenseado->kit->descricao}} </td>
                                     <td> {{$recenseado->data->format('d-m-Y')}} </td>
                                     <td> {{$recenseado->homen}} </td>
                                     <td> {{$recenseado->mulher}} </td>
-                                    <td> {{$recenseado->homen + $recenseado->mulher}} </td>
-
-                                    <td class="d-flex justify-content-center ">
-                                        <form action=" {{route('recenseado.destroy', ['id'=>$recenseado->id])}}  " method="post"
-                                            onsubmit=" return confirm('Atenção! Apagando dados... Tem certeza?');">
-                                         @csrf
-                                         @method('DELETE')
-                                         <button type="submit" class="btn btn-sm  text-primary ml-1 "><i class="fas fa-trash"></i> </button> <!--<i class="fa fa-trash"></i>-->
-                                        </form>
-                                    </td>
+                                    <td> {{$recenseado->homen + $recenseado->mulher}} </td>                                    
                                 </tr>
                             @endforeach
                         </tbody>

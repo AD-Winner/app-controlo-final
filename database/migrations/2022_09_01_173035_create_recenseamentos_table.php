@@ -18,6 +18,7 @@ class CreateRecenseamentosTable extends Migration
             $table->id();
             $table->string('tipo', 125)->nullable(false);
             $table->timestamp('data')->nullable(false);
+            $table->integer('estimado')->nullable(true);
             $table->timestamps();
         });
     }

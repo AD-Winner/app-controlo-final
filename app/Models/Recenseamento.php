@@ -12,6 +12,7 @@ class Recenseamento extends Model
     protected $fillable = [
         'tipo',
         'data',
+        'estimado',
     ];
 
     protected $casts =[

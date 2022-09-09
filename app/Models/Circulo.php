@@ -35,4 +35,8 @@ class Circulo extends Model
     public function kits(){
         return $this->hasMany(Kit::class);
     }
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
 }

@@ -112,7 +112,7 @@
                                 @elseif ($role->name=="admin"){{ 'Administrador' }}
                                 @elseif ($role->name=="coordenador-nacional"){{ 'Coordenador Nacional' }}
                                 @elseif ($role->name=="supervisor"){{ 'Supervisor' }}
-                                @elseif ($role->name=="coordenador-regional") {{ 'Coordenador de Regional' }}
+                                @elseif ($role->name=="coordenador-regional") {{ 'Coordenador Regional' }}
                                 @elseif ($role->name=="coordenador-provincia") {{ 'Coordenador de Provincia' }}
                                 @else {{$role->name}}
                                 @endif

@@ -39,7 +39,7 @@
         <div class="modal-content">
             <div class="modal-header">
             <!--Titre de modal-->
-                <h5 class="modal-title h5 font-weight-bold text-dark" id="exampleModalLongTitle"> Adicionar provincia </h5>
+                <h5 class="modal-title h5 font-weight-bold text-dark" id="exampleModalLongTitle"> Actulizar dados </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -113,9 +113,9 @@
             </div>
             <div class="col-12">
                 <div class="table-responsive ">
-                    <table id="datatable" class="table table-striped table-primary table-sm table-hover">
+                    <table id="datatable" class="table  table-default table-sm table-hover">
                             <thead class="">
-                                <tr>
+                                <tr class="table-primary">
                                     <th>Provincia</th>
                                     <th>Regiões</th>
                                     <th>Circulos</th>
@@ -142,7 +142,7 @@
                                         <td> {{$provincia->sectores->count() }} </td>
 
                                         <td class="d-flex justify-content-center ">
-                                            <button   class="btn btn-sm text-primary mr-1 edit"  data-toggle="modal" data-target="#editProvinciaModal" > <i class="fas text-primary fa-edit"></i> <!--Modifier --></button>
+                                            <button   class="btn btn-sm text-primary mr-1 edit"  onclick='editProvincia( {{$provincia->id}} )' data-toggle="modal" data-target="#editProvinciaModal" > <i class="fas text-primary fa-edit"></i> <!--Modifier --></button>
                                             <form action=" {{route('provincia.destroy', ['id'=>$provincia->id])}}  " method="post"
                                                 onsubmit=" return confirm('Atenção! Apagando dados... Tem certeza?');">
                                                 @csrf
@@ -164,15 +164,18 @@
 var table = $('#datatable').dataTable();
 // Start Edit Record
 table.on('click', '.edit', function(){
-    $tr = $(this).closest('tr');
-    if($($tr).hasClass('child')){
-        $tr = $tr.prev('.parent');
-    }
+    
+    console.log("click");
+    //var id = $('.edit').val();
+   // console.log(id);
 
 
 
 })
 // End Edit Record
+function editData(id){
+     console.log(id);
+}
 
 });
 

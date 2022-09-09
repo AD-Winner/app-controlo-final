@@ -50,13 +50,13 @@ class RoleController extends Controller
     }
 
 
-    
+
     public function destroy( Role $role ){
         try {
             //code...
             $role->delete();
             return redirect(route('role.index'))->with('success','[OK] Perfil eliminado com sucesso.');
-            
+
         } catch (\Throwable $th) {
             //throw $th;
             if(config('app.debug')){

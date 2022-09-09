@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Regiao;
 use App\Models\Sector;
 use App\Models\Recenseado;
@@ -47,5 +48,10 @@ class Kit extends Model
     public function recenseados(){
         return $this->hasMany(Recenseado::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 
 }

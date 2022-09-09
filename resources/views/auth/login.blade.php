@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container text-white">
     <div class="d-flex align-items-center flex-column justify-content-center pt-3 my-3">
@@ -44,21 +43,21 @@
                                         </span>
                                     @enderror
                             </div>
-                            <div class="form-group m-2 p-2">
+                            {{-- <div class="form-group m-2 p-2">
                                 <div class="custom-control custom-checkbox small">
                                     <input type="checkbox" class="custom-control-input" id="customCheck">
                                     <label class="custom-control-label" for="customCheck">
-                                        Remember Me
+                                        Lembrar Me
                                     </label>
                                 </div>
                             </div>
 
                             <div class="form-group">
 
-                                {{-- <i><a class="nav-link text-white" href="{{ route('register') }}">{{ __('Inscription') }}</a></i> --}}
+                                <i><a class="nav-link text-white" href="{{ route('register') }}">{{ __('Inscription') }}</a></i>
 
                             </div>
-
+                            --}}
                             <div class="form-group   p-1 text-center">
                                 <button class="btn btn-outline-light  btn-lg " type="submit"> <i class="fas fa-sign-in-alt"> </i>  Se conectar </button>
                             </div>

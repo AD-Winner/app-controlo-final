@@ -1,75 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    {{--  MODAL PARA ADICIONAR REGIÃO--}}
-    <div class="modal fade" id="AdicionarCirculoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <!--Titre de modal-->
-                    <h5 class="modal-title" id="exampleModalLongTitle">Adicionar Kits</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <h5 class="modal-title ml-3 text-primary font-weight-bold" id="exampleModalLongTitle"> {{$recenseamento->tipo}} {{$recenseamento->data->format('Y')}}</h5>
-                <!-- Corp de Modal-->
-                <form  method="POST" action=" {{route('kit.store')}} " >
-                    @csrf
-                    <input type="hidden" name="recenseamento_id" value="{{$recenseamento->id}}">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="provincia_id">Provincia:</label>
-                            <select name="provincia_id" class="form-control provincia" id="">
-                                <option > ..selecione provincia </option>
-                                @foreach ($provincias as $provincia )
-                                     <option value="{{ $provincia->id }}"> {{$provincia->provincia}} </option>
-                                @endforeach
-                            </select>
-                        </div>
-                         <div class="form-group">
-                            <label for="regiao_id">Região:</label>
-                            <select name="regiao_id" class="form-control regiao" id="" >
-                                <option  > selecione região</option>
 
-                            </select>
-                        </div>
-                         <div class="form-group">
-                            <label for="circulo_id">Circulo Eleitoral:</label>
-                            <select name="circulo_id" class="form-control circulo" id="" >
-                                <option  > selecione circulo</option>
-
-                            </select>
-                        </div>
-                         <div class="form-group">
-                            <label for="sector_id">Sector:</label>
-                            <select name="sector_id" class="form-control sector" id="" >
-                                <option  > selecione sector</option>
-
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="numero">Numero:</label>
-                            <input type="numero" min="1" max="1000" class="form-control"  placeholder="Codigo de Sector" name="numero" id="numero" >
-                        </div>
-                         <div class="form-group">
-                            <label for="descricao">Descrição:</label>
-                             <input type="text" class="form-control" max="20" min="3" name="descricao" id="descricao" placeholder="Digite descrição de Kit" />
-                        </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Adicionar</button>
-                         <button type="button" class="btn btn-sm btn-outline-info" data-dismiss="modal">Voltar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <!--FIN DE MODAL D'AJOUT DE REGION-->
-
-
     <div class="row bg-white pt-3 mt-1">
         <div class="col-sm-12">
                 @if ($errors->any())
@@ -93,19 +26,25 @@
                     <p>{{ \Session::get('error')}}</p>
                 </div>
             @endif
+            <h5 class="modal-title ml-3 text-primary font-weight-bold" id="exampleModalLongTitle"> {{$recenseamento->tipo}} : {{$recenseamento->data->format('Y')}}</h5>
+            <h6 class="modal-title ml-3 text-secondary font-weight-bold" id=""> <span class="text-primary"> Região :</span> {{ Auth::user()->regiao->regiao }},  <span class="text-primary">Circulo : </span>{{Auth::user()->circulo->cod_circulo }}, <span class="text-primary"> Sector : </span> {{ Auth::user()->sector->sector }} </h6>
              <hr class="featurette-divider">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="float-right">
-                            <!-- Botton de la modal d'ajout de Region-->
-                            <button type="button" class="btn btn-sm btn-primary mr-4 float-right" data-toggle="modal" data-target="#AdicionarCirculoModal">
-                                <i class="fas fa-plus"></i> Kit
-                            </button>
+                            <!-- Botton de voltar para recenseados-->
+                            <a class="btn btn-sm btn-primary mr-4 float-right"  href="{{ route('supervisor.recenseados') }}">
+                                <i class="fas fa-street-view"></i>
+                                 {{ __('Recenseados') }}
+                            </a>
+
                             {{-- <a class="btn btn-sm btn-outline-secondary" href=""><i class="fas fa-print"></i> PDF </a> --}}
                         </div>
                     </div>
+
                     <div class="col-sm-12 ">
-                          <h6 class="h6 font-weight-bold">Total <span class="text-primary"> {{$tot}} </span> Kits  </h6>
+                          <h6 class="h6 font-weight-bold">Total : <span class="text-primary"> {{$tot}} </span> Kits
+                            ,<span class="text-danger"> {{$totRecenseado}} </span> Eleitores Recenseados </h6>
                     </div>
                  </div>
                 {{-- <hr class="featurette-divider"> --}}
@@ -117,19 +56,20 @@
                             <tr>
                                 <th class="text-center" scope="col">Numero</th>
                                 <th  scope="col">Descrição</th>
-                                <th  scope="col">Sector</th>
-                                <th  scope="col">Região</th>
-                                <th  scope="col">Provincia</th>
+                                {{-- <th  scope="col">Sector</th> --}}
+                                <th  scope="col">Recenseados</th>
+                                {{-- <th  scope="col">Provincia</th> --}}
                                 <th  scope="col" class="text-center">Ações</th>
                             </tr>
                         </thead>
                         <tfoot class="table-primary">
                             <tr>
                                 <th class="text-center" scope="col">Numero</th>
+
                                 <th  scope="col">Descrição</th>
-                                <th  scope="col">Sector</th>
-                                <th  scope="col">Região</th>
-                                <th  scope="col">Provincia</th>
+                                <th  scope="col">Recenseados</th>
+                                {{-- <th  scope="col">Região</th>
+                                <th  scope="col">Provincia</th> --}}
                                 <th  scope="col" class="text-center">Ações</th>
                             </tr>
                         </tfoot>
@@ -138,10 +78,11 @@
                                 <tr>
                                     {{-- <td class="text-center"> {{$circulo->cod_regiao}} </td> --}}
                                     <td class="text-center"> {{$kit->numero}} </td>
+                                    
                                     <td> {{$kit->descricao}} </td>
-                                    <td> {{$kit->sector->sector}} </td>
-                                    <td> {{$kit->regiao->regiao}} </td>
-                                    <td> {{$kit->provincia->provincia}} </td>
+                                    <td> {{ ($kit->recenseados->sum('homen')) +  ($kit->recenseados->sum('mulher'))}} </td>
+                                    {{-- <td> {{$kit->sector->sector}} </td>
+                                    <td> {{$kit->provincia->provincia}} </td> --}}
                                     <td class="d-flex justify-content-center ">
                                         <form action=" {{route('kit.destroy', ['id'=>$kit->id])}}  " method="post"
                                             onsubmit=" return confirm('Atenção! Apagando dados... Tem certeza?');">
@@ -199,7 +140,7 @@
              data:{'id':provincia_id},
              success:function(data){
 
-             op+='<option value="0" selected disabled>selecione  região</option>';
+             op+='<option value="0" selected disabled>selecione a região</option>';
              for(var i=0; i<data.length; i++){
                  op+='<option value="'+data[i].id+'">'+data[i].cod_regiao+'-'+data[i].regiao+'</option>';
 
@@ -227,7 +168,7 @@
              //   console.log(data);
             //console.log("secteur");
             //console.log(data);
-            op+='<option value="0" selected disabled>selecione circulo</option>';
+            op+='<option value="0" selected disabled>selecione um circulo</option>';
              for(var i=0; i<data.length; i++){
                  op+='<option value="'+data[i].id+'">'+data[i].circulo+'</option>';
 
@@ -255,7 +196,7 @@
             // dataType:'json',
              success:function(data){
 
-            op+='<option value="0" selected disabled>selecione  sector</option>';
+            op+='<option value="0" selected disabled>selecione o sector</option>';
              for(var i=0; i<data.length; i++){
                  op+='<option value="'+data[i].id+'">'+data[i].cod_sector+'-'+data[i].sector+'</option>';
 

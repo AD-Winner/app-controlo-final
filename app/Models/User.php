@@ -1,12 +1,17 @@
 <?php
 
 namespace App\Models;
+use App\Models\Kit;
+use App\Models\Regiao;
+use App\Models\Sector;
+use App\Models\Circulo;
+use App\Models\Provincia;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -20,6 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'is_active',
         'provincia_id',
         'regiao_id',
         'sector_id',
@@ -43,6 +49,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function provincia(){
+        return $this->belongsTo(Provincia::class);
+    }
+
+    public function regiao(){
+        return $this->belongsTo(Regiao::class);
+    }
+
+    public function  circulo(){
+        return $this->belongsTo(Circulo::class);
+    }
+    public function sector(){
+        return $this->belongsTo(Sector::class);
+    }
+
+    public function kits(){
+        return $this->hasMany(Kit::class);
+    }
 }
 
 

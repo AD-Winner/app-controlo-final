@@ -25,6 +25,9 @@ class Sector extends Model
     public function provincia(){
         return $this->belongsTo(Provincia::class);
     }
+    public function user(){
+        return $this->hasOne(User::class);
+    }
 
     public function regiao(){
         return $this->belongsTo(Regiao::class);
@@ -32,7 +35,11 @@ class Sector extends Model
     public function circulo(){
         return $this->belongsTo(Circulo::class);
     }
-    
+
+    public function kits(){
+        return $this->hasMany(Kit::class);
+    }
+
 
 
 }

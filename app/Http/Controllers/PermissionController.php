@@ -29,11 +29,12 @@ class PermissionController extends Controller
     public function edit(Permission $permission){
         return view('admin.permissions.edit', compact('permission'));
     }
-   
-   
+
+
     public function show(Permission $permission){
-        
-        $roles = Role::all();
+
+        // $roles = Role::all();
+        $roles = Role::whereNotIn('name',['dev'])->get();
         return view('admin.permissions.show', compact('permission','roles'));
     }
 
@@ -57,7 +58,7 @@ class PermissionController extends Controller
             //code...
             $permission->delete();
             return redirect(route('permission.index'))->with('success','[OK] Perfil eliminado com sucesso.');
-            
+
         } catch (\Throwable $th) {
             //throw $th;
             if(config('app.debug')){
@@ -71,7 +72,7 @@ class PermissionController extends Controller
 
     public function assignRole(Request $request, Permission $permission){
 
-        
+
        try {
             //code...
             if($permission->hasRole($request->role)){
@@ -90,7 +91,7 @@ class PermissionController extends Controller
 }
 
 public function removeRole(Permission $permission, Role $role){
-    
+
     try {
         //code...
         if($permission->hasRole($role)){

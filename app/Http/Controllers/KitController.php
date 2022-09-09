@@ -23,15 +23,15 @@ class KitController extends Controller
     {
         //
         $recenseamento = Recenseamento::all()->last();
-        $kits = Kit::all();
-        $tot = Kit::count();
+        // $kits = Kit::all();
+        $kits = Kit::where('recenseamento_id', $recenseamento->id)->get();
+        $tot = Kit::where('recenseamento_id', $recenseamento->id)->count();
+
         $provincias = Provincia::all();
-        $sectores = Sector::all();
-        $regioes = Regiao::all();
-        $circulos = Circulo::all();
+       
 
 
-        return view('kit.index', compact('kits', 'tot', 'provincias', 'sectores','circulos', 'regioes', 'recenseamento'));
+        return view('kit.index', compact('kits', 'tot', 'provincias', 'recenseamento'));
     }
 
     /**

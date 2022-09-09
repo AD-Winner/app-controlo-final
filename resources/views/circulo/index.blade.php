@@ -99,8 +99,8 @@
 
         <div class="row">
             <div class="table-responsive">
-                    <table id="datatable" class="table  table-sm table-striped table-primary table-hover ">
-                        <thead >
+                    <table id="datatable" class="table  table-sm  table-hover ">
+                        <thead class="table-primary" >
                             <tr class="text-center">
                                <!-- <th>#</th> -->
                                 <th  scope="col">Codigo</th>
@@ -108,7 +108,7 @@
                                 <th  scope="col" class="text-center">Ações</th>
                             </tr>
                         </thead>
-                        <tfoot class="text-center" >
+                        <tfoot class="text-center  table-primary" >
                             <tr>
                                <!-- <th>#</th> -->
                                 <th class="text-center" scope="col">Codigo</th>
@@ -137,10 +137,6 @@
                             @endforeach
                         </tbody>
                 </table>
-                <div class="float-right">
-
-
-                </div>
             </div>
         </div>
     </div>

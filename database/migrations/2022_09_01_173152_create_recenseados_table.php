@@ -19,6 +19,7 @@ class CreateRecenseadosTable extends Migration
             $table->integer('homen');
             $table->integer('mulher');
 
+            $table->bigInteger('recenseamento_id')->unsigned();
             $table->bigInteger('provincia_id')->unsigned();
             $table->bigInteger('regiao_id')->unsigned();
             $table->bigInteger('circulo_id')->unsigned();
@@ -26,6 +27,7 @@ class CreateRecenseadosTable extends Migration
             $table->bigInteger('kit_id')->unsigned();
             
             //Set up of foreign key
+            $table->foreign('recenseamento_id')->references('id')->on('recenseamentos');
             $table->foreign('provincia_id')->references('id')->on('provincias');
             $table->foreign('regiao_id')->references('id')->on('regiaos');
             $table->foreign('circulo_id')->references('id')->on('circulos');

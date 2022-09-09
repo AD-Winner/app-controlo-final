@@ -50,22 +50,22 @@
                                 {{-- <input id="profil" type="text" class="form-control" name="profil"> --}}
                                 <select name="role" id="region_id" class="form-control">
                                     <option value="">..select...</option>
-                                   @foreach($roles as $role)
-                                     <option value="{{$role->name}}">
-                                        @if ($role->name=="admin")
-                                        {{ 'Administrador' }}
-                                        @elseif ($role->name=="cds")
-                                        {{ 'Chefe de Departemento EI' }}
-                                        @elseif ($role->name=="pcre")
-                                        {{ 'Presidente de CRE' }}
-                                        @elseif ($role->name=="dcse")
-                                        {{ 'Delegado de CRE' }}
-                                        @else
-                                        {{$role->name}}
-                                        @endif
-                                    </option>
-                                    @endforeach
-                                   </select>
+                                    @foreach($roles as $role)
+                                        <option value="{{$role->name}}">
+                                            @if ($role->name=="admin")
+                                            {{ 'Administrador' }}
+                                            @elseif ($role->name=="cds")
+                                            {{ 'Chefe de Departemento EI' }}
+                                            @elseif ($role->name=="pcre")
+                                            {{ 'Presidente de CRE' }}
+                                            @elseif ($role->name=="dcse")
+                                            {{ 'Delegado de CRE' }}
+                                            @else
+                                            {{$role->name}}
+                                            @endif
+                                        </option>
+                                        @endforeach
+                                </select>
                             </div>
                         </div>
                          <!-- CHAMPS POUR LACAL DE L'UTILISATEUR -->

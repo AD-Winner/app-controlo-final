@@ -13,9 +13,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-
-
                     <div class="row bg-white pt-3 mt-1">
                         <div class="col-sm-12">
                                 @if ($errors->any())

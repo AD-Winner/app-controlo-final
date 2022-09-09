@@ -25,15 +25,17 @@ class RecenseadoController extends Controller
         try {
             //code...
             $recenseamento = Recenseamento::all()->last();
-            $kits = Kit::all();
-            $m = Recenseado::sum('homen');
-            $f = Recenseado::sum('mulher');
+            $kits = Kit::where('recenseamento_id', $recenseamento->id)->get();
+            $m = Recenseado::where('recenseamento_id', $recenseamento->id)
+                ->sum('homen');
+            $f = Recenseado::where('recenseamento_id', $recenseamento->id)
+                ->sum('mulher');
             $tot = $m + $f;
             $provincias = Provincia::all();
             $sectores = Sector::all();
             $regioes = Regiao::all();
             $circulos = Circulo::all();
-            $recenseados = Recenseado::all();
+            $recenseados = Recenseado::where('recenseamento_id', $recenseamento->id)->get();
             return view('recenseado.index', compact('kits','recenseados', 'tot', 'provincias', 'sectores','circulos', 'regioes', 'recenseamento'));
 
         } catch (\Throwable $th) {
@@ -65,6 +67,7 @@ class RecenseadoController extends Controller
     public function store(StoreRecenseadoRequest $request)
     {
         //
+        // dd($request);
         $request->validate([
 
             'data' => 'required|date',
@@ -84,13 +87,12 @@ class RecenseadoController extends Controller
         $recenseado->data = $request->data;
         $recenseado->homen = $request->homen;
         $recenseado->mulher = $request->mulher;
-
+        $recenseado->recenseamento_id = $request->recenseamento_id;
         $recenseado->kit_id = $request->kit_id;
         $recenseado->provincia_id = $request->provincia_id;
         $recenseado->regiao_id = $request->regiao_id;
         $recenseado->circulo_id = $request->circulo_id;
         $recenseado->sector_id = $request->sector_id;
-
         $recenseado->save();
         return redirect(route('recenseado.index'))->with('success', '[OK] Dados registados com sucesso.');
     }
