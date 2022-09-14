@@ -9,7 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    
+
      {{-- <script src="{{ asset('js/refresh.js') }}"></script> --}}
 
     <!-- Scripts -->
@@ -61,21 +61,21 @@
                     <ul class="navbar-nav me-auto">
                         @role('admin')
                             <li class="nav-item">
-                                <a class="nav-link @if(\Route::current()->getName() == 'home') active font-weight-bold active text-primary @endif"  
+                                <a class="nav-link @if(\Route::current()->getName() == 'home') active font-weight-bold active text-primary @endif"
                                  href=" {{ route('home') }}"> <i class="fas fa-fw fa-tachometer-alt"></i>  {{ __('Dashboard') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link  @if(\Route::current()->getName() == 'user.index') active font-weight-bold active text-primary @endif"  
-                                href=" {{ route('user.index') }}"> 
+                                <a class="nav-link  @if(\Route::current()->getName() == 'user.index') active font-weight-bold active text-primary @endif"
+                                href=" {{ route('user.index') }}">
                                     <i class="fas fa-users"></i>  {{ __('Utilizadores') }}</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link @if(\Route::current()->getName() == 'role.index') active font-weight-bold active text-primary @endif" 
+                                <a class="nav-link @if(\Route::current()->getName() == 'role.index') active font-weight-bold active text-primary @endif"
                                 href="{{ route('role.index') }}">  <i class="fas fa-user"></i> {{ __('Perfis') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @if(\Route::current()->getName() == 'permission.index') active font-weight-bold active text-primary @endif" 
-                                    href="{{ route('permission.index') }}"> 
+                                <a class="nav-link @if(\Route::current()->getName() == 'permission.index') active font-weight-bold active text-primary @endif"
+                                    href="{{ route('permission.index') }}">
                                     <i class="fas fa-edit"></i> {{ __('Permissões') }}</a>
                             </li>
                         @endrole
@@ -125,18 +125,18 @@
                                 <a class="nav-link @if(\Route::current()->getName() == 'recenseamento.index') active font-weight-bold active text-primary   @endif " href="{{ route('recenseamento.index') }}">  <i class="fa fa-street-view"></i> {{ __('Recenseamentos') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @if(\Route::current()->getName() == 'kit.index' ) active  font-weight-bold active text-primary   @endif " 
+                                <a class="nav-link @if(\Route::current()->getName() == 'kit.index' ) active  font-weight-bold active text-primary   @endif "
                                     href="{{ route('kit.index') }}"><i class="fa fa-suitcase"></i> {{ __('Kits') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @if(\Route::current()->getName() == 'recenseado.index' ) active font-weight-bold active text-primary   @endif" 
+                                <a class="nav-link @if(\Route::current()->getName() == 'recenseado.index' ) active font-weight-bold active text-primary   @endif"
                                     href="{{ route('recenseado.index') }}"><i class="fa fa-id-card"></i> {{ __('Recenseados') }}</a>
                             </li>
                         @endrole
                         {{--  --}}
                         @role('coordenador-nacional')
                             <li class="nav-item">
-                                <a class="nav-link @if (\Route::current()->getName() == 'coordenador.nacional.kits' ) active font-weight-bold text-primary @endif " 
+                                <a class="nav-link @if (\Route::current()->getName() == 'coordenador.nacional.kits' ) active font-weight-bold text-primary @endif "
                                     href=" {{ route('coordenador.nacional.kits') }} ">
                                     {{-- <i class="fa fa-puzzle-piece"></i> --}}
                                     <i class="fa fa-suitcase"></i>
@@ -144,7 +144,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @if(\Route::current()->getName() == 'coordenador.nacional.recenseados' ) active font-weight-bold active text-primary   @endif" 
+                                <a class="nav-link @if(\Route::current()->getName() == 'coordenador.nacional.recenseados' ) active font-weight-bold active text-primary   @endif"
                                  href=" {{ route('coordenador.nacional.recenseados')}} ">
                                     {{-- <i class="fa fa-street-view"></i> --}}
                                     <i class="fa fa-id-card"></i>
@@ -155,16 +155,16 @@
                         {{-- Links para coordenador de provincia --}}
                         @role('coordenador-provincia')
                         <li class="nav-item">
-                            <a class="nav-link @if (\Route::current()->getName() == 'coordenador.provincial.kits' ) active font-weight-bold text-primary @endif " 
-                            
+                            <a class="nav-link @if (\Route::current()->getName() == 'coordenador.provincial.kits' ) active font-weight-bold text-primary @endif "
+
                             href=" {{ route('coordenador.provincial.kits')}} ">
                                 <i class="fa fa-suitcase"></i>
                                 {{-- <i class="fa fa-puzzle-piece"></i> --}}
                                     {{ __('Kits') }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link @if (\Route::current()->getName() == 'coordenador.provincial.recenseados' ) active font-weight-bold text-primary @endif "  
-                                    
+                                    <a class="nav-link @if (\Route::current()->getName() == 'coordenador.provincial.recenseados' ) active font-weight-bold text-primary @endif "
+
                                     href="{{ route('coordenador.provincial.recenseados')}} ">
                                         <i class="fa fa-id-card"></i>
                                         {{-- <i class="fa fa-street-view"></i> --}}
@@ -175,14 +175,14 @@
 
                         @role('coordenador-regional')
                         <li class="nav-item">
-                            <a class="nav-link @if (\Route::current()->getName() == 'coordenador.regional.kits' ) active font-weight-bold text-primary @endif " 
-                            
+                            <a class="nav-link @if (\Route::current()->getName() == 'coordenador.regional.kits' ) active font-weight-bold text-primary @endif "
+
                             href=" {{ route('coordenador.regional.kits')}} ">
                                 <i class="fa fa-suitcase"></i>
                                     {{ __('Kits') }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link @if (\Route::current()->getName() == 'coordenador.regional.recenseados' ) active font-weight-bold text-primary @endif "                                     
+                                    <a class="nav-link @if (\Route::current()->getName() == 'coordenador.regional.recenseados' ) active font-weight-bold text-primary @endif "
                                     href=" {{ route('coordenador.regional.recenseados')}} ">
                                         <i class="fa fa-id-card"></i>
                                         {{ __('Recenseados') }}</a>
@@ -190,13 +190,13 @@
                         @endrole
                         @role('supervisor')
                         <li class="nav-item">
-                            <a class="nav-link @if (\Route::current()->getName() == 'supervisor.kits' ) active font-weight-bold text-primary @endif " 
+                            <a class="nav-link @if (\Route::current()->getName() == 'supervisor.kits' ) active font-weight-bold text-primary @endif "
                             href=" {{ route('supervisor.kits') }} ">
                                 <i class="fa fa-suitcase"></i>
                                     {{ __('Kits') }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link @if (\Route::current()->getName() == 'supervisor.recenseados' ) active font-weight-bold text-primary @endif " 
+                                    <a class="nav-link @if (\Route::current()->getName() == 'supervisor.recenseados' ) active font-weight-bold text-primary @endif "
                                      href="{{ route('supervisor.recenseados') }}">
                                         <i class="fa fa-id-card"></i>
                                         {{ __('Recenseados') }}</a>
@@ -246,6 +246,18 @@
             @yield('content')
         </main>
     </div>
+     <!-- Footer -->
+     {{-- <footer class="sticky-footer bg-white">
+        <div class="container  my-auto">
+            <div class="copyright text-center  my-auto">
+                <span class="h6 text-primary font-weight-bold">Copyright &copy; Gabinete Tecnico de Apoio Ao Processo Eleitoral (GTAPE) {{ date('Y')}}  </span>
+            </div>
+            <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
+                Por: Aliu Djaló
+            </div>
+        </div>
+    </footer> --}}
+    <!-- End of Footer -->
 
     <!-- Page level plugins -->
     {{-- <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }} "></script> --}}
@@ -261,8 +273,8 @@
     <script src="{{ asset('datatables/text.js') }}"></script>
     <script src="{{ asset('chart.js/Chart.min.js') }}"></script>
 
-   
-    
+
+
 
 </body>
 </html>

@@ -78,9 +78,9 @@
                                 <tr>
                                     {{-- <td class="text-center"> {{$circulo->cod_regiao}} </td> --}}
                                     <td class="text-center"> {{$kit->numero}} </td>
-                                    
+
                                     <td> {{$kit->descricao}} </td>
-                                    <td> {{ ($kit->recenseados->sum('homen')) +  ($kit->recenseados->sum('mulher'))}} </td>
+                                    <td> {{ ($kit->recenseados->sum('homem')) +  ($kit->recenseados->sum('mulher'))}} </td>
                                     {{-- <td> {{$kit->sector->sector}} </td>
                                     <td> {{$kit->provincia->provincia}} </td> --}}
                                     <td class="d-flex justify-content-center ">

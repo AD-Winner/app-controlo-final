@@ -67,10 +67,14 @@
         @endif
         <!-- ALERT DE SUCCESS -->
         @if(\Session::has('success'))
-            <div class="alert alert-success">
+            <div class="alert alert-success ">
                 <p>{{ \Session::get('success')}}</p>
             </div>
         @endif
+
+        <!--Highlight-->
+		
+
 
         <!-- ALERT DANGER -->
         @if(\Session::has('error'))

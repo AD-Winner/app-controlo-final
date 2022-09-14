@@ -16,7 +16,7 @@ class Recenseado extends Model
 
     protected $fillable = [
         'data',
-        'homen',
+        'homem',
         'mulher',
 
         'provincia_id',

@@ -30,5 +30,5 @@ $('table').DataTable( {
                     },
                     "lengthMenu": [[ 10, 25, 100, -1], [10, 25, 100, "Todo"]],
                     "ordering": false,
-                } 
+                }
  );

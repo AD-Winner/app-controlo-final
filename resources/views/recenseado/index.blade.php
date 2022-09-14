@@ -175,7 +175,7 @@
                                     <td> {{$recenseado->data->format('d-m-Y')}} </td>
                                     <td> {{$recenseado->homen}} </td>
                                     <td> {{$recenseado->mulher}} </td>
-                                    <td> {{$recenseado->homen + $recenseado->mulher}} </td>
+                                    <td> {{$recenseado->homem + $recenseado->mulher}} </td>
 
                                     <td class="d-flex justify-content-center ">
                                         <form action=" {{route('recenseado.destroy', ['id'=>$recenseado->id])}}  " method="post"

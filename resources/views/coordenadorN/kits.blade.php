@@ -25,18 +25,18 @@
                     <p>{{ \Session::get('error')}}</p>
                 </div>
             @endif
-            <h5 class="modal-title ml-3 text-primary font-weight-bold" id="exampleModalLongTitle"> {{$recenseamento->tipo}} : {{$recenseamento->data->format('Y')}}</h5>            
+            <h5 class="modal-title ml-3 text-primary font-weight-bold" id="exampleModalLongTitle"> {{$recenseamento->tipo}} : {{$recenseamento->data->format('Y')}}</h5>
              <hr class="featurette-divider">
                 <div class="row">
-                    <div class="col-sm-12">                      
+                    <div class="col-sm-12">
                     </div>
 
                     <div class="col-sm-12 ">
                           <h6 class="h6 font-weight-bold">{{ __('Total :')}} <span class="text-primary"> {{$totKits}} </span> Kits
                             ,<span class="text-danger"> {{$f + $m}} </span> {{ __('Eleitores Recenseados,')}}
-                            <span class="text-primary">  {{__($m)}} </span>{{ __('Homens e ')}} 
-                                         <span class="text-primary">{{__($f)}} </span> 
-                                         {{('Mulheres')}}                            
+                            <span class="text-primary">  {{__($m)}} </span>{{ __('Homens e ')}}
+                                         <span class="text-primary">{{__($f)}} </span>
+                                         {{('Mulheres')}}
                         </h6>
                     </div>
                  </div>
@@ -51,8 +51,8 @@
                                 <th  scope="col">Sector</th>
                                 <th class="text-center" scope="col">Numero</th>
                                 <th  scope="col">Descrição</th>
-                                <th  scope="col">Recenseados</th>                                
-                                
+                                <th  scope="col">Recenseados</th>
+
                             </tr>
                         </thead>
                         <tfoot class="table-primary">
@@ -62,17 +62,17 @@
                                 <th class="text-center" scope="col">Numero</th>
                                 <th  scope="col">Descrição</th>
                                 <th  scope="col">Recenseados</th>
-                                
+
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach ($kits as $kit )
-                                <tr>                                 
+                                <tr>
                                     <td> {{$kit->regiao->regiao}} </td>
                                     <td> {{$kit->sector->sector}} </td>
-                                    <td class="text-center"> {{$kit->numero}} </td>                                    
+                                    <td class="text-center"> {{$kit->numero}} </td>
                                     <td> {{$kit->descricao}} </td>
-                                    <td> {{ ($kit->recenseados->sum('homen')) +  ($kit->recenseados->sum('mulher'))}} </td>                                                                    
+                                    <td> {{ ($kit->recenseados->sum('homem')) +  ($kit->recenseados->sum('mulher'))}} </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -86,7 +86,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-        var table = $('#datatable').dataTable();    
-    });   
+        var table = $('#datatable').dataTable();
+    });
 </script>
 @endsection

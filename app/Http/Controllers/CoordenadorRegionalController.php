@@ -23,7 +23,7 @@ class CoordenadorRegionalController extends Controller
 
         $m = Recenseado::where('regiao_id', Auth::user()->regiao_id)
             ->where('recenseamento_id', $recenseamento->id)
-            ->sum('homen');
+            ->sum('homem');
             //Soma de mulheres recenseados
         $f = Recenseado::where('regiao_id', Auth::user()->regiao_id)
             ->where('recenseamento_id', $recenseamento->id)
@@ -47,7 +47,7 @@ class CoordenadorRegionalController extends Controller
             //Soma de Homens recenseados
             $m = Recenseado::where('regiao_id', Auth::user()->regiao_id)
             ->where('recenseamento_id', $recenseamento->id)
-            ->sum('homen');
+            ->sum('homem');
             //Soma de mulheres recenseados
             $f = Recenseado::where('regiao_id', Auth::user()->regiao_id)
             ->where('recenseamento_id', $recenseamento->id)

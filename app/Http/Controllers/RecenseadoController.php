@@ -27,7 +27,7 @@ class RecenseadoController extends Controller
             $recenseamento = Recenseamento::all()->last();
             $kits = Kit::where('recenseamento_id', $recenseamento->id)->get();
             $m = Recenseado::where('recenseamento_id', $recenseamento->id)
-                ->sum('homen');
+                ->sum('homem');
             $f = Recenseado::where('recenseamento_id', $recenseamento->id)
                 ->sum('mulher');
             $tot = $m + $f;
@@ -71,7 +71,7 @@ class RecenseadoController extends Controller
         $request->validate([
 
             'data' => 'required|date',
-            'homen' => 'required|integer|max:1000|min:1',
+            'homem' => 'required|integer|max:1000|min:1',
             'mulher' => 'required|integer|max:1000|min:1',
 
             'recenseamento_id' => 'required|integer|exists:recenseamentos,id',
@@ -85,7 +85,7 @@ class RecenseadoController extends Controller
 
         $recenseado = new Recenseado();
         $recenseado->data = $request->data;
-        $recenseado->homen = $request->homen;
+        $recenseado->homem = $request->homen;
         $recenseado->mulher = $request->mulher;
         $recenseado->recenseamento_id = $request->recenseamento_id;
         $recenseado->kit_id = $request->kit_id;

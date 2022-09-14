@@ -15,7 +15,7 @@ class CoordenadorNacionalController extends Controller
         $kits = Kit::where('recenseamento_id', $recenseamento->id)->get();
         $totKits = Kit::where('recenseamento_id', $recenseamento->id)->count();
 
-        $m = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('homen');
+        $m = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('homem');
             //Soma de mulheres recenseados
         $f = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('mulher');
        // $totRecenseado = $m + $f;//Soma Total de Recenseados
@@ -31,10 +31,9 @@ class CoordenadorNacionalController extends Controller
             //Recuperação de recenseados
             $recenseados = Recenseado::where('recenseamento_id', $recenseamento->id)->get();
             //Soma de Homens recenseados
-            $m = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('homen');
+            $m = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('homem');
             //Soma de mulheres recenseados
-            $f = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('mulher');
-            
+            $f = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('mulher');            
             return view('coordenadorN.recenseado', compact('kits','recenseados', 'recenseamento', 'f','m'));
 
         } catch (\Throwable $th) {

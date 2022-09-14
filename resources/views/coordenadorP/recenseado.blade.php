@@ -30,13 +30,13 @@
             <h6 class="modal-title ml-3 text-secondary font-weight-bold" id=""> <span class="text-primary"> Provincia :</span> {{ __(Auth::user()->provincia->provincia) }}  <h6>
              <hr class="featurette-divider">
              <div class="row">
-                    <div class="col-sm-12">                        
+                    <div class="col-sm-12">
                             </div>
                             <div class="col-sm-12 ">
-                                    <h6 class="h6 font-weight-bold"> {{ __('Total :') }} <span class="text-primary"> {{__($f + $m) }} </span> Eleitores Recenseados, 
+                                    <h6 class="h6 font-weight-bold"> {{ __('Total :') }} <span class="text-primary"> {{__($f + $m) }} </span> Eleitores Recenseados,
                                         <span class="text-primary">  {{__($m)}} </span>
-                                         {{('Homens e ')}} 
-                                         <span class="text-primary">  {{__($f)}} </span> 
+                                         {{('Homens e ')}}
+                                         <span class="text-primary">  {{__($f)}} </span>
                                          {{('Mulheres')}}
                                     </h6>
                             </div>
@@ -48,14 +48,14 @@
             <div class="table-responsive">
                     <table id="datatable" class="table  table-sm table-hover ">
                         <thead class="table-primary">
-                            <tr>                               
+                            <tr>
                                 <th  scope="col">Sector</th>
                                 <th  scope="col">Kit</th>
                                 <th  scope="col">Data</th>
                                 <th  scope="col">Homens</th>
                                 <th  scope="col">Mulheres</th>
                                 <th  scope="col">Total</th>
-                                
+
 
                             </tr>
                         </thead>
@@ -66,18 +66,18 @@
                                 <th  scope="col">Data</th>
                                 <th  scope="col">Homens</th>
                                 <th  scope="col">Mulheres</th>
-                                <th  scope="col">Total</th>                                
+                                <th  scope="col">Total</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach ($recenseados as $recenseado )
-                                <tr>                                    
+                                <tr>
                                     <td> {{$recenseado->sector->sector}} </td>
                                     <td> {{$recenseado->kit->numero}} : {{$recenseado->kit->descricao}} </td>
                                     <td> {{$recenseado->data->format('d-m-Y')}} </td>
-                                    <td> {{$recenseado->homen}} </td>
+                                    <td> {{$recenseado->homem}} </td>
                                     <td> {{$recenseado->mulher}} </td>
-                                    <td> {{$recenseado->homen + $recenseado->mulher}} </td>                                    
+                                    <td> {{$recenseado->homem+ $recenseado->mulher}} </td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -25,18 +25,18 @@
                         <input type="hidden" name="sector_id"   value="{{ Auth::user()->sector_id}}"/>
 
                         <div class="form-group font-weight-bold text-secondary">
-                            <label for="data">Data de Recenseamento:</label>
-                             <input type="date" class="form-control" id="data" max="2"  require
-                             min="1" name="data"  placeholder="Digite tipo data de recenseamento..." />
+                            <label for="data">{{ __('Data de Recenseamento (mês/dia/ano):')}}</label>
+                             <input type="date" class="form-control" id="data"   require
+                             min="1" name="data"  placeholder="Digite data de recenseamento..." />
                         </div>
                         <div class="form-group">
                             <label for="homen">Homens:</label>
-                            <input type="number" class="form-control" max="600" min="1" name="homen"  placeholder="Homens recenseados..." />
+                            <input type="number" class="form-control" max="6000" min="1" name="homen"  placeholder="Homens recenseados..." />
                         </div>
 
                         <div class="form-group">
                             <label for="mulher">Mulheres:</label>
-                            <input type="number" class="form-control" max="600" min="1" name="mulher"  placeholder="Mulheres recenseadas..." />
+                            <input type="number" class="form-control" max="6000" min="1" name="mulher"  placeholder="Mulheres recenseadas..." />
                         </div>
 
 
@@ -139,9 +139,9 @@
                                     <td> {{$recenseado->sector->cod_sector}} : {{$recenseado->sector->sector}} </td> --}}
                                     <td> {{$recenseado->kit->descricao}} </td>
                                     <td> {{$recenseado->data->format('d-m-Y')}} </td>
-                                    <td> {{$recenseado->homen}} </td>
+                                    <td> {{$recenseado->homem}} </td>
                                     <td> {{$recenseado->mulher}} </td>
-                                    <td> {{$recenseado->homen + $recenseado->mulher}} </td>
+                                    <td> {{$recenseado->homem + $recenseado->mulher}} </td>
 
                                     <td class="d-flex justify-content-center ">
                                         @can('apagar')
