@@ -173,7 +173,7 @@
                                     <td> {{$recenseado->sector->cod_sector}} : {{$recenseado->sector->sector}} </td>
                                     <td> {{$recenseado->kit->numero}} : {{$recenseado->kit->descricao}} </td>
                                     <td> {{$recenseado->data->format('d-m-Y')}} </td>
-                                    <td> {{$recenseado->homen}} </td>
+                                    <td> {{$recenseado->homem}} </td>
                                     <td> {{$recenseado->mulher}} </td>
                                     <td> {{$recenseado->homem + $recenseado->mulher}} </td>
 

@@ -31,6 +31,7 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+
     /**
      * Create a new controller instance.
      *
@@ -42,12 +43,20 @@ class LoginController extends Controller
     }
 
     protected function authenticated(Request $request, $user){
-         
+
         if($user->is_active == false){
-            return redirect(route('login'))->with('error', 'ATENÇÃO! Conta inactiva, contacte administrador.');
+            return redirect()->route('login')->with('error', 'ATENÇÃO! Conta inactiva, contacte administrador.');
+        }
+        // if($user->hasRole('coordenador-nacional')){
+        //     // return redirect()->route('login')->with('error', 'ATENÇÃO! Conta inactiva, contacte administrador.');
+        //     return redirect(route('coordenador.nacional.dashboard'));
+        // }
+
+        else{
+
+            return redirect(route('home'));
         }
 
-        return redirect(route('home'));   
         // if($user->profil=='Administrateur' || $user->profil=='administrateur' || $user->profil=='admin'){
         //    // return RouteServiceProvider::HOMEADMIN;
         //    return redirect()->route('home-admin');

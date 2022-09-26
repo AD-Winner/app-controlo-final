@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
-    <div class="row float-right">
+<div class="container bg-light">
+    <div class="row float-right mt-2">
         <div class="float-right">
             <button type="button" class="btn btn-sm btn-outline-primary"
                     data-toggle="modal" data-target="#AjouterRoleModal">
@@ -9,7 +9,7 @@
               </button>
         </div>
     </div>
-    <h6 class="h6 font-weight-bold text-primary mt-0">Permissão de utilizadores</h6>
+    <h6 class="h6 font-weight-bold text-primary mt-2">Permissão de utilizadores</h6>
     <h6 class="h6 font-weight-bold text-dark mt-0"> Total <strong> {{ $tot }} </strong> Perfis  </h6>
     <div class="modal fade" id="AjouterRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <div class="row bg-white text- ">
+    <div class="row bg-light">
         <div class="col-sm-12">
             <!-- MESSAGE DE ERREUR -->
         @if ($errors->any())

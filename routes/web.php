@@ -134,28 +134,28 @@ Route::middleware(['auth', 'role:supervisor'])->group( function(){
 
 // Rotas para coordenador Regional e logados podem accessar
 Route::middleware(['auth', 'role:coordenador-regional'])->group( function(){
-    Route::prefix('controlo-regional')->group(function(){       
+    Route::prefix('controlo-regional')->group(function(){
         Route::get('/dashboard', [App\Http\Controllers\CoordenadorRegionalController::class, 'dashboard'])->name('coordenador.regional.dashboard');
         Route::get('/kits', [App\Http\Controllers\CoordenadorRegionalController::class, 'kits'])->name('coordenador.regional.kits');
-        Route::get('/diario', [App\Http\Controllers\CoordenadorRegionalController::class, 'recenseados'])->name('coordenador.regional.recenseados');        
+        Route::get('/diario', [App\Http\Controllers\CoordenadorRegionalController::class, 'recenseados'])->name('coordenador.regional.recenseados');
     });
 });
 
 // Rotas para coordenador provincial conectados podem accessar
 Route::middleware(['auth', 'role:coordenador-provincia'])->group( function(){
-    Route::prefix('controlo-provincial')->group(function(){       
+    Route::prefix('controlo-provincial')->group(function(){
         Route::get('dashboard', [App\Http\Controllers\CoordenadorProvinciaController::class, 'dashboard'])->name('coordenador.provincial.dashboard');
         Route::get('kits', [App\Http\Controllers\CoordenadorProvinciaController::class, 'kits'])->name('coordenador.provincial.kits');
-        Route::get('diario', [App\Http\Controllers\CoordenadorProvinciaController::class, 'recenseados'])->name('coordenador.provincial.recenseados');        
+        Route::get('diario', [App\Http\Controllers\CoordenadorProvinciaController::class, 'recenseados'])->name('coordenador.provincial.recenseados');
     });
 });
 
 // Rotas para coordenador Nacional conectados podem accessar
 Route::middleware(['auth', 'role:coordenador-nacional'])->group( function(){
-    Route::prefix('controlo-nacional')->group(function(){       
-        Route::get('dashboard', [App\Http\Controllers\CoordenadorNacionalController::class, 'dashboard'])->name('coordenador.nacional.dashboard');
+    Route::prefix('controlo-nacional')->group(function(){
+        Route::get('dashboard', [App\Http\Controllers\CoordenadorNacionalController::class, 'index'])->name('coordenador.nacional.dashboard');
         Route::get('kits', [App\Http\Controllers\CoordenadorNacionalController::class, 'kits'])->name('coordenador.nacional.kits');
-        Route::get('diario', [CoordenadorNacionalController::class, 'recenseados'])->name('coordenador.nacional.recenseados');        
+        Route::get('diario', [CoordenadorNacionalController::class, 'recenseados'])->name('coordenador.nacional.recenseados');
     });
 });
 

@@ -25,13 +25,13 @@
                         <input type="hidden" name="sector_id"   value="{{ Auth::user()->sector_id}}"/>
 
                         <div class="form-group font-weight-bold text-secondary">
-                            <label for="data">{{ __('Data de Recenseamento (mês/dia/ano):')}}</label>
+                            <label for="data">{{ __('Data de Recenseamento :')}}</label>
                              <input type="date" class="form-control" id="data"   require
                              min="1" name="data"  placeholder="Digite data de recenseamento..." />
                         </div>
                         <div class="form-group">
-                            <label for="homen">Homens:</label>
-                            <input type="number" class="form-control" max="6000" min="1" name="homen"  placeholder="Homens recenseados..." />
+                            <label for="homem">Homens:</label>
+                            <input type="number" class="form-control" max="6000" min="1" name="homem"  placeholder="Homens recenseados..." />
                         </div>
 
                         <div class="form-group">

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Kit;
 use App\Models\Sector;
+use App\Models\Recenseado;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -36,4 +37,9 @@ class Regiao extends Model
     public function users(){
         return $this->hasMany(User::class);
     }
+    public function recenseados(){
+        return $this->hasMany(Recenseado::class);
+    }
+
+
 }

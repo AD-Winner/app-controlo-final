@@ -59,7 +59,7 @@
                                 {{-- <th  scope="col">Sector</th> --}}
                                 <th  scope="col">Recenseados</th>
                                 {{-- <th  scope="col">Provincia</th> --}}
-                                <th  scope="col" class="text-center">Ações</th>
+                                {{-- <th  scope="col" class="text-center">Ações</th> --}}
                             </tr>
                         </thead>
                         <tfoot class="table-primary">
@@ -70,7 +70,7 @@
                                 <th  scope="col">Recenseados</th>
                                 {{-- <th  scope="col">Região</th>
                                 <th  scope="col">Provincia</th> --}}
-                                <th  scope="col" class="text-center">Ações</th>
+                                {{-- <th  scope="col" class="text-center">Ações</th> --}}
                             </tr>
                         </tfoot>
                         <tbody>
@@ -83,14 +83,14 @@
                                     <td> {{ ($kit->recenseados->sum('homem')) +  ($kit->recenseados->sum('mulher'))}} </td>
                                     {{-- <td> {{$kit->sector->sector}} </td>
                                     <td> {{$kit->provincia->provincia}} </td> --}}
-                                    <td class="d-flex justify-content-center ">
+                                    {{-- <td class="d-flex justify-content-center ">
                                         <form action=" {{route('kit.destroy', ['id'=>$kit->id])}}  " method="post"
                                             onsubmit=" return confirm('Atenção! Apagando dados... Tem certeza?');">
                                          @csrf
                                          @method('DELETE')
                                          <button type="submit" class="btn btn-sm text-primary ml-1 "><i class="fas fa-trash"></i> </button> <!--<i class="fa fa-trash"></i>-->
                                         </form>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

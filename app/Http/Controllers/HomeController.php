@@ -10,7 +10,9 @@ use App\Models\Provincia;
 use App\Models\Recenseado;
 use Illuminate\Http\Request;
 use App\Models\Recenseamento;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use Users;
 
 class HomeController extends Controller
 {
@@ -40,38 +42,47 @@ class HomeController extends Controller
         //Total Coordenadores
         $totalCoord = Role::whereNotIn('name', ['admin', 'dev','supervisor'])->count();
         //Total Supervisor
-        $totalSuper = Role::whereIn('name', ['coodenador-nacional','coodenador-regional', 'coodenador-provincia', 'dev','admin'])->count();
+        // $userRoles = User::count($u)
+        $totalSuper = Role::whereNotIn('name', ['coordenador-nacional','coordenador-regional', 'coordenador-provincia', 'dev','admin'])->count();
+        $totalAdmin = Role::whereNotIn('name', ['coordenador-nacional','coordenador-regional', 'coordenador-provincia', 'dev','supervisor'])->count();
         // Soma de Homens recenseados
-        $homen = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('homem');
+        $h = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('homem');
         //Soma de mulheres recenseados
-        $mulher = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('mulher');
-        $estimado = $recenseamento->estimado; // Recuperação da população estimada
-        $totalRecenseado = $homen + $mulher; // Soma de Homem e Mulheres
-        $resto = $totalRecenseado - $estimado; // Diferença entre Recenseados e Estimação
+        $m  = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('mulher');
+        // dd($mulher);
+        $estimad = $recenseamento->estimado; // Recuperação da população estimada
+        $estimado = number_format($estimad);
+        $totalRecensead = $h + $m; // Soma de Homem e Mulheres
+        $homen = number_format($h); //Formatar o numero de homens
+        $mulher = number_format($m); //Formatar o numero de mulheres
+        $totalRecenseado = number_format($totalRecensead); // Soma de Homem e Mulheres
+        $rest = $totalRecensead - $estimad; // Diferença entre Recenseados e Estimação
+        $resto = number_format($rest);
         // Calculo de percentual de recenseamento de acordo com estimação
         $pourcentual_total_recenseado = 0;
             if($estimado != 0){
-                $pourcentual_total_recenseado = number_format(($totalRecenseado * 100 / $estimado),2);
+                $pourcentual_total_recenseado = number_format(($totalRecensead * 100 / $estimad),2);
+            }
+            $regiaos = Regiao::orderBy('cod_regiao', 'ASC')->with('recenseados')->get();
+
+            $reg = array(); $totR = array();  //Array para conter dados regionais
+            foreach ($regiaos as $regiao) {
+                $somaRegiao = 0;
+                // echo "Regiao: ".$regiao->regiao." Recenseados :";
+                array_push($reg, $regiao->regiao);
+                foreach ($regiao->recenseados as $recenseado) {
+                    # code...
+                    $hom = intval($recenseado->homem);
+                    $mul = intval($recenseado->mulher);
+                    $total = $hom  + $mul;
+                    $somaRegiao = $somaRegiao + $total;
+                }
+                array_push($totR, $somaRegiao);
             }
 
-            // $regiaoDados = Recenseado::where('recenseamento_id', $recenseamento->id)->sum('homen');
-            // dd($regiaoDados);
-        $dados_Regiao = Recenseado::select(Recenseado::raw('sum(homem + mulher) as total, regiao_id'))
-            ->where('recenseamento_id', '=', $recenseamento->id)
-            ->with('regiao')
-            ->groupBy('regiao_id')
-            ->get();
-            foreach ($dados_Regiao as $regiao) {
-                # code...
-                echo $regiao->regiao->regiao. " " .$regiao->total ."<br>";
-            }
-
-            // ->orderBy('homen','DESC')
-            // ->get();
-            // dd($soma_dados_Regiao);
         return view('home',
-        compact('totalProvincia','totalRegiao','totalSector', 'totalKit',
-            'recenseamento', 'mulher','homen', 'totalRecenseado',
+         compact('totalProvincia','estimado','totalRegiao', 'totalAdmin', 'totalSector','reg', 'totR', 'totalKit', 'regiaos',
+            'recenseamento','mulher','homen', 'totalRecenseado',
             'pourcentual_total_recenseado', 'resto', 'totalCoord', 'totalSuper'));
 
     }
@@ -92,20 +103,4 @@ class HomeController extends Controller
             //It will get Secteur if its id match with cercle id
             return response()->json($data);
     }
-    // public function findDistrictName (Request $request){
-    //     $data=District::select('district','id', 'cod_district')
-    //         ->where('secteur_id', $request->id)
-    //         ->orderBY('cod_district', 'ASC')
-    //         ->take(200)->get();
-    //         //It will get district if its id match with cercle id
-    //         return response()->json($data);
-    // }
-    // public function findBureauName (Request $request){
-    //     $data=Bureau::select('bureau','id', 'cod_bureau')
-    //         ->where('district_id', $request->id)
-    //         ->orderBY('cod_bureau', 'ASC')
-    //         ->take(200)->get();
-    //         //It will get district if its id match with cercle id
-    //         return response()->json($data);
-    // }
 }

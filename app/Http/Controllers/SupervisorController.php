@@ -75,9 +75,9 @@ class SupervisorController extends Controller
     public function store(StoreRecenseadoRequest $request){
           //
         // dd($request);
-    try{
+    // try{
 
-    
+
         $request->validate([
 
             'data' => 'required|date',
@@ -94,23 +94,23 @@ class SupervisorController extends Controller
 
         $recenseado = new Recenseado();
         $recenseado->data = $request->data;
-        $recenseado->homem = $request->homen;
+        $recenseado->homem = $request->homem;
         $recenseado->mulher = $request->mulher;
         $recenseado->recenseamento_id = $request->recenseamento_id; //Recenseamento
         $recenseado->kit_id = $request->kit_id; // Kit Recenseador
-        $recenseado->provincia_id = $request->provincia_id; // 
+        $recenseado->provincia_id = $request->provincia_id; //
         $recenseado->regiao_id = $request->regiao_id;
         $recenseado->circulo_id = $request->circulo_id;
         $recenseado->sector_id = $request->sector_id;
         $recenseado->save();
         return redirect(route('supervisor.recenseados'))->with('success', '[OK] Dados registados com sucesso.');
-    } catch (\Throwable $th) {
-        //throw $th;
-        if(config('app.debug')){
-            return redirect(route('supervisor.recenseados'))->with('error', '[ERROR] Operação abortada, dados não registos!');
-        }
-        return redirect(route('supervisor.recenseados'))->with('error', '[ERROR] Dados não foram registos!');
-    }
+    // } catch (\Throwable $th) {
+    //     //throw $th;
+    //     if(config('app.debug')){
+    //         return redirect(route('supervisor.recenseados'))->with('error', '[ERROR] Operação abortada, dados não registos!');
+    //     }
+    //     return redirect(route('supervisor.recenseados'))->with('error', '[ERROR] Dados não foram registos!');
+    // }
     }
     public function destroy(Recenseado $recenseado){
         try {
