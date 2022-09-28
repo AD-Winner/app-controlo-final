@@ -47,14 +47,19 @@ class LoginController extends Controller
         if($user->is_active == false){
             return redirect()->route('login')->with('error', 'ATENÇÃO! Conta inactiva, contacte administrador.');
         }
-        // if($user->hasRole('coordenador-nacional')){
-        //     // return redirect()->route('login')->with('error', 'ATENÇÃO! Conta inactiva, contacte administrador.');
-        //     return redirect(route('coordenador.nacional.dashboard'));
-        // }
+
+        if(Auth::user()->hasRole('coordenador-provincia')){
+
+            return redirect(route('coordenador.provincial.dashboard'));
+        }
+        if(Auth::user()->hasRole('admin')){
+
+            return redirect(route('home'));
+        }
 
         else{
 
-            return redirect(route('home'));
+            return redirect(route('login'));
         }
 
         // if($user->profil=='Administrateur' || $user->profil=='administrateur' || $user->profil=='admin'){

@@ -27,7 +27,6 @@ class CoordenadorNacionalController extends Controller
                 ->where('name', 'coordenador-regional')
                 ->where('name', 'coordenador-provincia')
                 ->count();
-        //Total Supervisor
         // $userRoles = User::count($u)
         $totalSuper = Role::whereNotIn('name', ['coordenador-nacional','coordenador-regional', 'coordenador-provincia', 'dev','admin'])->count();
         $totalAdmin = Role::whereNotIn('name', ['coordenador-nacional','coordenador-regional', 'coordenador-provincia', 'dev','supervisor'])->count();
@@ -49,8 +48,8 @@ class CoordenadorNacionalController extends Controller
             if($estimado != 0){
                 $pourcentual_total_recenseado = number_format(($totalRecensead * 100 / $estimad),2);
             }
-            $regiaos = Regiao::orderBy('cod_regiao', 'ASC')->with('recenseados')->get();
 
+            $regiaos = Regiao::orderBy('cod_regiao', 'ASC')->with('recenseados')->get();
             $reg = array(); $totR = array();  //Array para conter dados regionais
             foreach ($regiaos as $regiao) {
                 $somaRegiao = 0;

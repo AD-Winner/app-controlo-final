@@ -114,7 +114,7 @@
                         @endrole
                         @role('coordenador-nacional')
                             <li class="nav-item">
-                                <a class="nav-link  @if(\Route::current()->getName() == 'coordenador.nacional.dashboard') active font-weight-bold active text-primary    @endif " href=" {{ route('coordenador.nacional.dashboard') }} "> <i class="fas fa-fw fa-tachometer-alt"></i>  {{ __('Dashboard') }}</a>
+                                <a class="nav-link  @if(\Route::current()->getName() == 'home') active font-weight-bold active text-primary    @endif " href=" {{ route('home') }} "> <i class="fas fa-fw fa-tachometer-alt"></i>  {{ __('Dashboard') }}</a>
                             </li>
                         @endrole
                     </ul>
